@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, chromium } from '@playwright/test';
 
 // @ts-check
 test('Login Page', async ({ page }) => {
@@ -8,7 +8,7 @@ test('Login Page', async ({ page }) => {
     await expect(page).toHaveURL(/.*login/)
 });
 
-test('Dushboard', async ({ page }) => {
+test('Dashboard', async ({ page }) => {
     await page.goto('http://localhost/dashboard');
 
     await page.getByLabel('Email').fill('test@example.com');
