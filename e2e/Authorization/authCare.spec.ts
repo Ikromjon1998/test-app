@@ -4,7 +4,7 @@ import * as path from "path";
 
 config({path: path.resolve(__dirname, '../../.env')});
 
-// test.describe.configure({ mode: 'parallel' });
+test.describe.configure({ mode: 'parallel' });
 
 let browser:Browser;
 let context:BrowserContext;
@@ -17,14 +17,13 @@ const baseUrl = process.env.BASE_URL;
 test.beforeEach(async ({ browser }) => {
     context = await browser.newContext({ headless: true });
     page = await context.newPage();
-});
-
-test('Update Vorname to the Anastasiya', async ({ browser }) => {
     await page.goto('https://care-stage.iubh.de');
     await page.getByPlaceholder('Benutzername').fill(username);
     await page.getByRole('textbox', { name: 'Passwort' }).fill(password);
     await page.getByRole('button', { name: 'Login' }).click();
+});
 
+test('Update Vorname to the Anastasiya', async ({ browser }) => {
     await page.waitForTimeout(3000);
     await page.goto(baseUrl);
 
@@ -39,12 +38,6 @@ test('Update Vorname to the Anastasiya', async ({ browser }) => {
 });
 
 test('Update Vorname to the Anita', async ({ browser }) => {
-
-    await page.goto('https://care-stage.iubh.de');
-    await page.getByPlaceholder('Benutzername').fill(username);
-    await page.getByRole('textbox', { name: 'Passwort' }).fill(password);
-    await page.getByRole('button', { name: 'Login' }).click();
-
     await page.waitForTimeout(3000);
     await page.goto(baseUrl);
 
